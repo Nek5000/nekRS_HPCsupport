@@ -34,4 +34,4 @@ export NEKRS_HOME=<your prefered location>/nekrs
 CC=cc CXX=CC FC=ftn ./build.sh -DCMAKE_INSTALL_PREFIX=$NEKRS_HOME
 ```
 
-When submitting the job, use `USE_COMPILER=gnu ./nrsqsub_frontier` 
+Set your preferred PrgEnv by specifying the env-var `USE_COMPILER`.
