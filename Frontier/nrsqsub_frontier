@@ -72,7 +72,7 @@ if [ $USE_COMPILER == "amd" ]; then
   fi
   echo "module unload cray-libsci" >> $SFILE
 
-  echo "export NEKRS_FFLAGS=-O2 -g -march=native -ftree-vectorize -fuse-ld=bfd" >>$SFILE
+  echo "export NEKRS_FFLAGS=\"-O2 -g -march=native -ftree-vectorize -fuse-ld=bfd\"" >>$SFILE
 elif [ $USE_COMPILER == "gnu" ]; then
   echo "module load PrgEnv-gnu" >> $SFILE
   echo "module load module load gcc-native/13.2" >> $SFILE
