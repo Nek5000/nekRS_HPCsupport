@@ -58,6 +58,8 @@ echo "export NEKRS_HOME=$NEKRS_HOME" >>$SFILE
 echo "export NEKRS_GPU_MPI=1 " >>$SFILE
 echo "export OOGS_ENABLE_NBC_DEVICE=1 " >>$SFILE
 
+echo "export NEKRS_JITC_NTHREADS=4 " >>$SFILE
+
 echo "export ROMIO_HINTS=$ROMIO_HINTS" >>$SFILE
 
 echo "export NEKRS_CACHE_BCAST=$NEKRS_CACHE_BCAST" >> $SFILE
