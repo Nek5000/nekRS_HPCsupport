@@ -82,6 +82,9 @@ echo "export NEKRS_LOCAL_TMP_DIR=/local/scratch" >>$SFILE
 echo "export MPICH_GPU_SUPPORT_ENABLED=1" >> $SFILE
 echo "export MPICH_OFI_NIC_POLICY=NUMA" >> $SFILE
 
+# 2025-08-29 RMA hangs issue
+echo "export MPIR_CVAR_CH4_OFI_ENABLE_RMA=0" >> $SFILE
+
 CMD=.lhelper
 rm -rf $CMD; sleep 0.1s
 echo "#!/bin/bash" >$CMD
