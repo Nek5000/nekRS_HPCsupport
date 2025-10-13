@@ -34,7 +34,7 @@ $NEKRS_HOME/bin/nrsqsub_frontier
 
 A typical usage looks like this (see the variables section below for all options):
 ```sh
-PROJ_ID=<project> ./nrsqsub_frontier <case> <#nodeis> <hh:mm>
+PROJ_ID=<project> ./nrsqsub_frontier <case> <#nodes> <hh:mm>
 ```
 
 - `PROJ_ID`: your allocation/account
