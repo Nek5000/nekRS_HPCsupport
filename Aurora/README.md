@@ -1,3 +1,5 @@
+## Install
+
 ```
 module load cmake
 module list

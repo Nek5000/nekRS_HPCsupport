@@ -1,3 +1,5 @@
+## Install
+
 ```
 module load PrgEnv-gnu
 module load cudatoolkit

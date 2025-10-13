@@ -1,3 +1,5 @@
+## Install
+
 ### PrgEnv-amd
 
 ```
