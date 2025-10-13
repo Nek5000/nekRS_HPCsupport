@@ -38,7 +38,7 @@ PROJ_ID=<project> ./nrsqsub_frontier <case> <#nodes> <hh:mm>
 ```
 
 - `PROJ_ID`: your allocation/account
-- `<case>`: case name
+- `<case>`: case name, `.par` or `.sess` file
 - `<#nodes>`: number of nodes
 - `<hh:mm>`: walltime (hours:minutes).
 
