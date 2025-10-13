@@ -17,8 +17,10 @@ for dir in */; do
     # Check if nrsqsub exists inside this directory
     src="$dir_name/nrsqsub"
     if [ -f "$src" ]; then
-        # Destination filename with directory suffix
-        dest="$NEKRS_HOME/bin/nrsqsub_$dir_name"
+        # Destination filename with directory suffix (lower case)
+        fname="nrsqsub_$dir_name"
+        fname=`echo $fname | tr '[:upper:]' '[:lower:]'`
+        dest="$NEKRS_HOME/bin/$fname"
 
         # Copy the file
         cp "$src" "$dest"
