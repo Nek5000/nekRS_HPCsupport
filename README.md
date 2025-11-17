@@ -1,30 +1,31 @@
 # nekRS HPC support
 
-This repo offers scripts and a brief installation guide to run
-[**nekRS**](https://github.com/Nek5000/NekRS.git) on common HPC machines.
-It’s community-maintained and subject to change with system updates.
-It targets the latest nekRS but, in principle, older branches should work with
-minimal tweaks.
+This repo offers scripts and a brief installation guide for running
+[**nekRS**](https://github.com/Nek5000/NekRS.git) on common HPC systems.
+It’s community-maintained and may change as systems are frequently updated.
+The scripts target the latest nekRS, but older branches should work with minor
+tweaks.
 
-**Note:** This is **not** a general nekRS install guide. See the main nekRS repo
-for full instructions.
+**Note:** This is **not** a general nekRS installation guide. For ful
+ documentation, see the [readthedocs page](https://nekrs.readthedocs.io/en/latest/).
 
 
 ## Install
 
-Clone our repo for the latest updates:
+After installing **nekRS**, set `NEKRS_HOME` in your environment, then clone
+this repository for the latest scripts:
 ```sh
 git clone https://github.com/Nek5000/nekRS_HPCsupport
 cd nekRS_HPCsupport
 ```
 
-With the `NEKRS_HOME` set to your nekRS installation, run:
+With `NEKRS_HOME` pointing to your nekRS installation, run:
 ```sh
 ./install.sh
 ```
 
-The scripts will be installed to `$NEKRS_HOME/bin` with a machine-name postfix.
-For example:
+The HPC scripts will be installed into `$NEKRS_HOME/bin` with a lower case
+machine-name suffix. For example:
 ```sh
 $NEKRS_HOME/bin/nrsqsub_frontier
 ```
@@ -42,13 +43,17 @@ PROJ_ID=<project> ./nrsqsub_frontier <case> <#nodes> <hh:mm>
 - `<#nodes>`: number of nodes
 - `<hh:mm>`: walltime (hours:minutes).
 
-Example (1 node, 30 mins on Frontier)
+Example:
 ```sh
-cd $NEKRS_HOME/examples/turbPipePeriodic
+# Get turbPipePeriodic example
+cp -r $NEKRS_HOME/examples/turbPipePeriodic .
+cd turbPipePeriodic
+
+# Request 1 node, 30 mins on Frontier
 PROJ_ID=ABC123 ./nrsqsub_frontier turbPipe.par 1 00:30
 ```
 
-Full list of variables
+You can see the full list of environment variables via `--help`:
 ```sh
 $ ./nrsqsub_frontier --help
 
@@ -69,7 +74,10 @@ OPT_ARGS                string      optional arguements e.g. "--cimode 1 --debug
 
 ## Contributing
 
-Pull requests are welcome—for fixes, module/config updates, and new systems.
-New scripts should target public multi-user HPC systems, follow the repo’s style,
-support existing env vars, be tested end-to-end, and include a short per-system
-README (modules, compilers, quirks).
+Pull requests are welcome for fixes, module or configuration updates, and
+support for new systems. New scripts should target public multi-user HPC
+systems, follow this repository's style and conventions, honor the existing
+environment variables, and be tested end-to-end on the target machine. Please
+also include a short per-system README covering modules, compilers, and any
+quirks. For reference, see the bash functions defined in
+`$NEKRS_HOME/scripts/nrsqsub_utils`.
