@@ -27,4 +27,4 @@ Add `export MPIR_CVAR_CH4_OFI_ENABLE_RMA=0` to avoid hangs.
 **2025-11-18**
 
 `nvhpc-mixed` is deprecated and `nvidia-mixed` will soon to be deprecated as well.
-Switch to `cuda` and `cudatoolkit-standalone`. Pin cuda 12.6 and gcc 13.2 for compability.
+Switch to `cuda` and `cudatoolkit-standalone`. Pin cuda 12.6 and gcc 13.2 for compatibility.
