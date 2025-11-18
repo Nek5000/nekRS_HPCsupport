@@ -6,7 +6,7 @@ It’s community-maintained and may change as systems are frequently updated.
 The scripts target the latest nekRS, but older branches should work with minor
 tweaks.
 
-**Note:** This is **not** a general nekRS installation guide. For ful
+**Note:** This is **not** a general nekRS installation guide. For full
  documentation, see the [readthedocs page](https://nekrs.readthedocs.io/en/latest/).
 
 
