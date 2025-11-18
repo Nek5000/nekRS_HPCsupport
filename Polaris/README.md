@@ -1,11 +1,12 @@
 ## Install
 
 ```
+module restore
 module use /soft/modulefiles
-module use /opt/cray/pe/lmod/modulefiles/mix_compilers
-module load libfabric
-module load PrgEnv-gnu
-module load nvhpc-mixed
+module swap PrgEnv-nvidia PrgEnv-gnu
+module load cudatoolkit-standalone/12.6
+module load cuda/12.6
+module load gcc-native/13.2
 module load craype-x86-milan craype-accel-nvidia80
 module load spack-pe-base cmake
 
@@ -22,3 +23,8 @@ CC=cc CXX=CC FC=ftn ./build.sh -DCMAKE_INSTALL_PREFIX=$NEKRS_HOME
 
 The new Polaris HPCM update seems to introduce bug in MPI RMA.
 Add `export MPIR_CVAR_CH4_OFI_ENABLE_RMA=0` to avoid hangs.
+
+**2025-11-18**
+
+`nvhpc-mixed` is deprecated and `nvidia-mixed` will soon to be deprecated as well.
+Switch to `cuda` and `cudatoolkit-standalone`. Pin cuda 12.6 and gcc 13.2 for compability.
