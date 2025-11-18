@@ -50,11 +50,12 @@ echo "echo Jobid: \$PBS_JOBID" >>$SFILE
 echo "echo Running on host \`hostname\`" >>$SFILE
 echo "echo Running on nodes \`cat \$PBS_NODEFILE\`" >>$SFILE
 
+echo "module restore" >> $SFILE
 echo "module use /soft/modulefiles" >> $SFILE
-echo "module use /opt/cray/pe/lmod/modulefiles/mix_compilers" >> $SFILE
-echo "module load libfabric" >> $SFILE
-echo "module load PrgEnv-gnu" >> $SFILE
-echo "module load nvhpc-mixed" >> $SFILE
+echo "module swap PrgEnv-nvidia PrgEnv-gnu" >> $SFILE
+echo "module load cudatoolkit-standalone/12.6" >> $SFILE
+echo "module load cuda/12.6" >> $SFILE
+echo "module load gcc-native/13.2" >> $SFILE
 echo "module load craype-x86-milan craype-accel-nvidia80" >> $SFILE
 echo "module load spack-pe-base cmake" >> $SFILE
 if [ $USE_ASCENT -eq 1 ]; then
