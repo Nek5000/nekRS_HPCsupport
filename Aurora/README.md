@@ -9,3 +9,11 @@ export NEKRS_HOME=<your prefered location>/nekrs
 
 CC=mpicc CXX=mpic++ FC=mpif77 ./build.sh -DCMAKE_INSTALL_PREFIX=$NEKRS_HOME 
 ```
+
+
+## Update
+
+**2025-11-22**
+
+Add `NEKRS_CACHE_BCAST=1` to ease the filesystem pressure. When `flare` is busy,
+this seems to speed up the kernel load time.
