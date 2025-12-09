@@ -6,6 +6,10 @@ if [ -z "$NEKRS_HOME" ]; then
     exit 1
 fi
 
+# Run relative to this script
+cd $(dirname -- "$0")
+echo "cd $PWD"
+
 # Loop over all subdirectories in the current directory
 for dir in */; do
     # Remove trailing slash
