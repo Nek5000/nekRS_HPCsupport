@@ -33,7 +33,9 @@ module list
 # path to target installed location
 export NEKRS_HOME=<your prefered location>/nekrs
 
-CC=cc CXX=CC FC=ftn ./build.sh -DCMAKE_INSTALL_PREFIX=$NEKRS_HOME
+CC=cc CXX=CC FC=ftn ./build.sh \
+  -DCMAKE_INSTALL_PREFIX=$NEKRS_HOME \
+  -DENABLE_HYPRE_GPU=off
 ```
 
 Set your preferred PrgEnv by specifying the env-var `USE_COMPILER`.
