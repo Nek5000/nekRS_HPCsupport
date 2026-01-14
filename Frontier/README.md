@@ -38,4 +38,9 @@ CC=cc CXX=CC FC=ftn ./build.sh \
   -DENABLE_HYPRE_GPU=off
 ```
 
-Set your preferred PrgEnv by specifying the env-var `USE_COMPILER`.
+## Run
+
+The submit script has both environment. Set your preferred PrgEnv by specifying the env-var `USE_COMPILER`. For example,
+```
+USE_COMPILER=gnu $NEKRS_HOME/bin/nrsqsub_frontier ethier 1 00:30
+```
