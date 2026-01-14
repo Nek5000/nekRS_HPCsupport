@@ -5,7 +5,7 @@ module restore
 module use /soft/modulefiles
 module swap PrgEnv-nvidia PrgEnv-gnu
 module load cudatoolkit-standalone/12.6
-module load cuda/12.6
+module load cuda/12.9
 module load gcc-native/13.2
 module load craype-x86-milan craype-accel-nvidia80
 module load spack-pe-base cmake
@@ -28,3 +28,7 @@ Add `export MPIR_CVAR_CH4_OFI_ENABLE_RMA=0` to avoid hangs.
 
 `nvhpc-mixed` is deprecated and `nvidia-mixed` will soon to be deprecated as well.
 Switch to `cuda` and `cudatoolkit-standalone`. Pin cuda 12.6 and gcc 13.2 for compatibility.
+
+**2026-01-05**
+
+The `cude/12.6` module is gone after the update. Swtich to `cuda/12.9`.
