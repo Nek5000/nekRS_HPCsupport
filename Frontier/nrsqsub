@@ -1,7 +1,8 @@
 #!/bin/bash
 set -e
 
-: ${QUEUE:="batch"}
+# https://docs.olcf.ornl.gov/systems/frontier_user_guide.html#job-priority-by-node-count
+: ${QUEUE:="batch"} # batch / debug / extended
 
 : ${USE_COMPILER:="amd"} # amd or gnu (gcc13)
 : ${NEKRS_GPU_MPI:=0}
@@ -53,7 +54,8 @@ echo "#SBATCH -J $jobname" >>$SFILE
 echo "#SBATCH -o %x-%j.out" >>$SFILE
 echo "#SBATCH -t ${time}:00" >>$SFILE
 echo "#SBATCH -N $qnodes" >>$SFILE
-echo "#SBATCH -p $QUEUE" >>$SFILE
+echo "#SBATCH -p batch" >>$SFILE
+echo "#SBATCH -q $QUEUE" >>$SFILE
 echo "#SBATCH -C nvme" >>$SFILE
 echo "#SBATCH --exclusive" >>$SFILE
 echo "#SBATCH --ntasks-per-node=$gpu_per_node" >>$SFILE
