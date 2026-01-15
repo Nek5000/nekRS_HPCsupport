@@ -2,7 +2,7 @@
 set -e
 
 # https://docs.olcf.ornl.gov/systems/frontier_user_guide.html#job-priority-by-node-count
-: ${QUEUE:="batch"} # batch / debug / extended
+: ${QUEUE:="normal"} # normal / debug
 
 : ${USE_COMPILER:="amd"} # amd or gnu (gcc13)
 : ${NEKRS_GPU_MPI:=0}
