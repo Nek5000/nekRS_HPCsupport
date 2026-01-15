@@ -54,7 +54,7 @@ echo "module restore" >> $SFILE
 echo "module use /soft/modulefiles" >> $SFILE
 echo "module swap PrgEnv-nvidia PrgEnv-gnu" >> $SFILE
 echo "module load cudatoolkit-standalone/12.6" >> $SFILE
-echo "module load cuda/12.6" >> $SFILE
+echo "module load cuda/12.9" >> $SFILE
 echo "module load gcc-native/13.2" >> $SFILE
 echo "module load craype-x86-milan craype-accel-nvidia80" >> $SFILE
 echo "module load spack-pe-base cmake" >> $SFILE
