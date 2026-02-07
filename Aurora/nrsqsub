@@ -92,6 +92,7 @@ echo "romio_cb_read enable" >> $s
 echo "cb_buffer_size 16777216" >> $s
 echo "cb_config_list *:8" >> $s
 echo "striping_unit 2097152" >> $s # should matchchunk size
+echo "striping_count 16" >> $s 
 echo "export ROMIO_HINTS=.romio_hint" >> $SFILE # MPIIO-hint is for cray
 echo "export MPICH_MPIIO_STATS=1" >> $SFILE
 
