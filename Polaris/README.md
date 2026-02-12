@@ -4,7 +4,7 @@
 module restore
 module use /soft/modulefiles
 module swap PrgEnv-nvidia PrgEnv-gnu
-module load cudatoolkit-standalone/12.6
+module load cudatoolkit-standalone/12.9
 module load cuda/12.9
 module load gcc-native/13.2
 module load craype-x86-milan craype-accel-nvidia80
