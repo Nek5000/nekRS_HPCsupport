@@ -17,3 +17,7 @@ CC=mpicc CXX=mpic++ FC=mpif77 ./build.sh -DCMAKE_INSTALL_PREFIX=$NEKRS_HOME
 
 Add `NEKRS_CACHE_BCAST=1` to ease the filesystem pressure. When `flare` is busy,
 this seems to speed up the kernel load time.
+
+**2026-03-11**
+
+Comment out outdated workaround variables for level-zero and MPIR.
