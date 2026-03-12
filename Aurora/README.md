@@ -20,4 +20,4 @@ this seems to speed up the kernel load time.
 
 **2026-03-11**
 
-Comment out outdated workaround variables for level-zero and MPIR.
+After the recent OS and OneAPI update, comment out outdated workaround variables for Level Zero and MPIR.
