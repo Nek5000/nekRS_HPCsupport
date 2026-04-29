@@ -113,7 +113,7 @@ if [ $RUN_ONLY -eq 0 ]; then
   add_build_CMD "$SFILE" "$CMD_build" "$TOTAL_RANKS"
 fi
 
-echo "unset NEKRS_JITC_NTHREADS" >> $CMD
+echo "unset NEKRS_JITC_NTHREADS" >> $SFILE
 
 if [ $BUILD_ONLY -eq 0 ]; then
   link_neknek_logfile "$SFILE"
