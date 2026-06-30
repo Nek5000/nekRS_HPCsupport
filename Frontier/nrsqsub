@@ -7,6 +7,7 @@ set -e
 : ${USE_COMPILER:="amd"} # amd or gnu (gcc13)
 : ${NEKRS_GPU_MPI:=0}
 : ${USE_ASCENT:=0}
+: ${NEKRS_JITC_NTHREADS:=7}
 
 NEKRS_CACHE_BCAST=1
 
@@ -158,15 +159,16 @@ if [ $NEKRS_CACHE_BCAST -eq 1 ]; then
 fi
 echo "ldd $bin" >> $SFILE
 
-echo "export NEKRS_JITC_NTHREADS=$cores_per_numa" >> $SFILE
-
 if [ $RUN_ONLY -eq 0 ]; then
   echo -e "\n# precompilation" >>$SFILE
+  if [ $USE_JITC_NTHREAD -gt 1 ]; then
+    echo "export NEKRS_JITC_NTHREADS=$NEKRS_JITC_NTHREADS" >> $SFILE
+  fi
   CMD_build="srun -N 1 -n $gpu_per_node $bin --backend $backend --device-id 0 $extra_args --setup \$case_tmp --build-only \$ntasks_tmp"
   add_build_CMD "$SFILE" "$CMD_build" "$ntasks"
+  echo "unset NEKRS_JITC_NTHREADS" >> $SFILE
 fi
 
-echo "unset NEKRS_JITC_NTHREADS" >> $SFILE
 
 if [ $BUILD_ONLY -eq 0 ]; then
   link_neknek_logfile "$SFILE"
