@@ -48,12 +48,12 @@ echo "echo Running on nodes \`cat \$PBS_NODEFILE\`" >>$SFILE
 echo "module load cmake" >> $SFILE
 if [ $USE_ASCENT -eq 1 ]; then
   echo "module use /soft/modulefiles/" >> $SFILE
-  echo "module load ascent/develop/2025-03-19-c1f63e7-openmp" >> $SFILE
+  echo "module load ascent/release/v0.9.5" >> $SFILE
 fi
 echo "module list" >> $SFILE
 
 if [ $USE_ASCENT -eq 1 ]; then
-  echo "export NEKRS_ASCENT_INSTALL_DIR=\"/soft/visualization/ascent/develop/2025-03-19-c1f63e7-openmp/ascent-checkout/\"" >>$SFILE
+  echo "export NEKRS_ASCENT_INSTALL_DIR=\"/soft/visualization/ascent/release/v0.9.5/ascent-checkout/\"" >>$SFILE
   echo "export NEKRS_MPI_THREAD_MULTIPLE=1" >>$SFILE # ascent async mode
 fi
 
