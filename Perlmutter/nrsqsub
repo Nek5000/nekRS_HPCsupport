@@ -2,6 +2,7 @@
 set -e
 
 : ${QUEUE:="regular"} # https://docs.nersc.gov/jobs/policy/#perlmutter-gpu
+: ${NEKRS_JITC_NTHREADS:=8}
 
 source $NEKRS_HOME/bin/nrsqsub_utils
 setup $# 1
@@ -71,8 +72,12 @@ echo "fi" >> $SFILE
 
 if [ $RUN_ONLY -eq 0 ]; then
   echo -e "\n# precompilation" >>$SFILE
+  if [ $USE_JITC_NTHREAD -gt 1 ]; then
+    echo "export NEKRS_JITC_NTHREADS=$NEKRS_JITC_NTHREADS" >> $SFILE
+  fi
   CMD_build="srun -N 1 $bin --backend $backend --device-id 0 --setup \$case_tmp $extra_args --build-only \$ntasks_tmp"
   add_build_CMD "$SFILE" "$CMD_build" "$ntasks"
+  echo "unset NEKRS_JITC_NTHREADS" >> $SFILE
 fi
 
 if [ $BUILD_ONLY -eq 0 ]; then
