@@ -101,7 +101,7 @@ echo "squeue -u \$USER" >>$SFILE
 echo "export MPICH_GPU_SUPPORT_ENABLED=1" >>$SFILE
 
 if [ $USE_ASCENT -eq 1 ]; then
-  echo "export NEKRS_ASCENT_INSTALL_DIR=\"$OLCF_ASCENT_ROOT/\"" >> $SFILE
+  echo "export NEKRS_ASCENT_INSTALL_DIR=\"\$OLCF_ASCENT_ROOT/\"" >> $SFILE
   echo "export NEKRS_MPI_THREAD_MULTIPLE=1" >>$SFILE # ascent async mode
 fi
 
