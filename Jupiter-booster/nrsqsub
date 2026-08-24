@@ -1,0 +1,70 @@
+#!/bin/bash
+set -xe
+
+source $NEKRS_HOME/bin/nrsqsub_utils
+setup $# 1
+
+NEKRS_CACHE_BCAST=1
+
+gpu_per_node=4
+let cores_per_task=72
+let nn=$nodes*$gpu_per_node
+let ntasks=nn
+backend=CUDA
+
+chk_case $ntasks
+
+# sbatch
+SFILE=s.bin
+echo "#!/bin/bash" > $SFILE
+echo "#SBATCH -A $PROJ_ID" >>$SFILE
+echo "#SBATCH -J $jobname" >>$SFILE
+echo "#SBATCH -o %x-%j.out" >>$SFILE
+echo "#SBATCH -t ${time}:00" >>$SFILE
+echo "#SBATCH -N $qnodes" >>$SFILE
+echo "#SBATCH --exclusive" >>$SFILE
+echo "#SBATCH --ntasks-per-node=$gpu_per_node" >>$SFILE
+echo "#SBATCH --cpus-per-task=$cores_per_task" >>$SFILE
+echo "#SBATCH --gres=gpu:$gpu_per_node" >> $SFILE
+echo "#SBATCH --distribution=block:cyclic:fcyclic" >> $SFILE
+
+echo "module load GCC OpenMPI Python UCX-settings/DC-CUDA CMake Ascent" >>$SFILE
+echo "module list" >>$SFILE
+
+echo "export UCX_DC_MLX5_TX_POLICY=rand" >> $SFILE
+echo "export UCX_MAX_RNDV_RAILS=1" >> $SFILE
+
+echo "nvidia-smi" >>$SFILE
+
+echo "ucx_info -f" >>$SFILE
+
+echo "ulimit -s unlimited " >>$SFILE
+echo "ulimit -c 0" >>$SFILE
+
+echo "export NEKRS_HOME=$NEKRS_HOME" >>$SFILE
+echo "export NEKRS_GPU_MPI=1 " >>$SFILE
+echo "export OOGS_ENABLE_NBC_DEVICE=1 " >>$SFILE
+
+echo "export SRUN_CPUS_PER_TASK=\${SLURM_CPUS_PER_TASK}" >>$SFILE 
+echo "export OMP_NUM_THREADS=\${SLURM_CPUS_PER_TASK}" >>$SFILE
+
+if [ $RUN_ONLY -eq 0 ]; then
+  echo -e "\n# precompilation" >>$SFILE
+  CMD_build="srun --cpu-bind=cores $bin --backend $backend --device-id 0 --setup \$case_tmp $extra_args --build-only \$ntasks_tmp"
+  add_build_CMD "$SFILE" "$CMD_build" "$ntasks"
+fi
+
+if [ $BUILD_ONLY -eq 0 ]; then
+  link_neknek_logfile "$SFILE"
+
+  echo "export NEKRS_CACHE_BCAST=$NEKRS_CACHE_BCAST" >> $SFILE
+
+  echo -e "\n# actual run" >>$SFILE
+  CMD_run="$bin --backend $backend --device-id 0 $extra_args --setup $case"
+  if [ $NEKRS_CACHE_BCAST -eq 1 ]; then
+    echo "srun --cpu-bind=cores bash -c 'export NEKRS_LOCAL_TMP_DIR=\$TMPDIR/nrs; mkdir -p \$NEKRS_LOCAL_TMP_DIR; exec $CMD_run'" >>$SFILE
+  else
+    echo "srun --cpu-bind=cores $CMD_run" >>$SFILE
+  fi
+fi
+sbatch $SFILE
